@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Discover collections, learning spaces, events, and library services at Alexandria Archive & Learning Hub.">
+  <meta name="theme-color" content="#142e2a">
+  <title>Alexandria Archive &amp; Learning Hub</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182b28;
+      --muted: #52635f;
+      --paper: #f7f5ef;
+      --surface: #fffefa;
+      --green: #245c4b;
+      --green-dark: #142e2a;
+      --gold: #d39a45;
+      --line: #d9dfd8;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: "Segoe UI", Arial, sans-serif;
+      font-family: var(--sans);
+      color: var(--ink);
+      background: var(--paper);
+      scroll-behavior: smooth;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-width: 20rem;
+      line-height: 1.65;
+    }
+
+    a { color: var(--green); text-underline-offset: .2em; }
+    a:hover { color: var(--green-dark); }
+    a:focus-visible, button:focus-visible, input:focus-visible,
+    select:focus-visible, textarea:focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 3px;
+    }
+
+    img { display: block; max-width: 100%; }
+    p { max-width: 70ch; }
+    h1, h2, h3 { font-family: var(--serif); line-height: 1.15; }
+    h2 { font-size: clamp(2rem, 4vw, 3.25rem); margin: 0 0 1rem; }
+    h3 { font-size: 1.5rem; margin: 0 0 .65rem; }
+    section { scroll-margin-top: 2rem; }
+
+    .skip-link {
+      position: absolute;
+      z-index: 10;
+      top: .75rem;
+      left: .75rem;
+      padding: .65rem 1rem;
+      color: white;
+      background: var(--green-dark);
+      transform: translateY(-180%);
+    }
+    .skip-link:focus { transform: translateY(0); }
+
+    .site-header {
+      color: #fffefa;
+      background: var(--green-dark);
+    }
+    .header-inner, .content-width, .footer-inner {
+      width: min(72rem, calc(100% - 3rem));
+      margin-inline: auto;
+    }
+    .header-inner { padding: 1.25rem 0 0; }
+    .brand {
+      display: inline-block;
+      color: inherit;
+      font: 700 1.35rem/1.2 var(--serif);
+      text-decoration: none;
+    }
+    .tagline { margin: .25rem 0 1.2rem; color: #d8e5dc; font-size: .95rem; }
+    .primary-nav ul, .footer-nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .3rem 1.4rem;
+      margin: 0;
+      padding: .8rem 0;
+      list-style: none;
+    }
+    .primary-nav { border-top: 1px solid #ffffff36; }
+    .primary-nav a { color: #fffefa; font-size: .92rem; text-decoration: none; }
+    .primary-nav a:hover { text-decoration: underline; }
+
+    .hero {
+      display: grid;
+      align-items: center;
+      min-height: 26rem;
+      color: white;
+      background:
+        linear-gradient(90deg, rgb(15 39 34 / 92%) 0%, rgb(15 39 34 / 72%) 48%, rgb(15 39 34 / 18%) 100%),
+        url("https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=2000&q=85") center 48% / cover;
+    }
+    .hero-copy { width: min(72rem, calc(100% - 3rem)); margin: 0 auto; padding: 4.5rem 0; }
+    .eyebrow {
+      margin: 0 0 .8rem;
+      color: #f2c982;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      max-width: 13ch;
+      margin: 0;
+      font-size: clamp(2.8rem, 7vw, 5.7rem);
+      font-weight: 500;
+    }
+    .hero-copy > p:last-child { max-width: 42rem; margin: 1.2rem 0 0; font-size: 1.12rem; }
+    .section-pad { padding-block: clamp(3.5rem, 7vw, 6rem); }
+    .section-intro { margin: 0 0 2rem; color: var(--muted); font-size: 1.08rem; }
+    .about-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(16rem, .75fr); gap: 3rem; }
+    blockquote {
+      margin: 2rem 0 0;
+      padding: 1rem 0 1rem 1.4rem;
+      border-left: 3px solid var(--gold);
+      font: italic 1.35rem/1.5 var(--serif);
+    }
+    blockquote p { margin: 0 0 .65rem; }
+    blockquote cite { color: var(--muted); font: normal .9rem var(--sans); }
+    .event-card {
+      align-self: start;
+      padding: 1.6rem;
+      background: #e8eee7;
+      border-top: 4px solid var(--green);
+    }
+    .event-card .eyebrow { color: var(--green); }
+    .event-card p:last-child { margin-bottom: 0; }
+
+    .catalog-section { background: #ecefe9; }
+    .book-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+    .book-card {
+      display: grid;
+      grid-template-columns: minmax(9rem, .8fr) minmax(0, 1.2fr);
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--line);
+    }
+    .book-card figure { display: flex; flex-direction: column; margin: 0; background: #e3e1d7; }
+    .book-card figure img { width: 100%; height: 100%; min-height: 17rem; object-fit: cover; }
+    .book-card figcaption { padding: .6rem .8rem; color: var(--muted); font-size: .8rem; }
+    .book-info { padding: 1.35rem; }
+    .book-info h3 { font-size: 1.35rem; }
+    .book-info .author { margin: -.25rem 0 1rem; color: var(--muted); }
+    mark { padding: .08rem .3rem; color: #203b32; background: #f4d99e; }
+    .book-info ul { margin: .8rem 0 0; padding-left: 1.2rem; }
+    code { padding: .12rem .35rem; background: #eef0eb; font-size: .9em; }
+
+    .table-wrap { overflow-x: auto; margin-top: 1.5rem; }
+    table { width: 100%; border-collapse: collapse; background: var(--surface); text-align: left; }
+    caption { padding: 0 0 .85rem; color: var(--muted); text-align: left; }
+    th, td { padding: .9rem 1rem; border: 1px solid var(--line); vertical-align: top; }
+    thead th { color: white; background: var(--green-dark); }
+    tbody th { min-width: 9rem; }
+    tfoot { color: var(--muted); font-size: .92rem; }
+    tfoot td { background: #eef0eb; }
+
+    .media-section { color: #f8f6ef; background: var(--green-dark); }
+    .media-section .section-intro { color: #d2ded7; }
+    .audio-card {
+      max-width: 52rem;
+      padding: 1.5rem;
+      border: 1px solid #ffffff45;
+      background: #ffffff0b;
+    }
+    audio { display: block; width: 100%; margin: 1rem 0; }
+    .media-section a { color: #f2c982; }
+    .media-note { margin-bottom: 0; color: #d2ded7; font-size: .9rem; }
+
+    .facilities-reference { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .facilities-reference h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); }
+    .hall-list { padding-left: 1.4rem; }
+    .hall-list li { padding: .35rem 0 .35rem .3rem; }
+    .reference-list { margin: 0; }
+    .reference-list dt { margin-top: 1rem; font-weight: 700; }
+    .reference-list dt:first-child { margin-top: 0; }
+    .reference-list dd { margin: .25rem 0 0; color: var(--muted); }
+
+    .reserve-section { background: #ecefe9; }
+    .reserve-form {
+      max-width: 58rem;
+      padding: clamp(1.2rem, 4vw, 2.5rem);
+      background: var(--surface);
+      border: 1px solid var(--line);
+    }
+    fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
+    fieldset + fieldset { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
+    legend { margin-bottom: 1rem; font: 700 1.35rem var(--serif); }
+    .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.1rem 1.4rem; }
+    .field { display: flex; flex-direction: column; gap: .35rem; }
+    .field-full { grid-column: 1 / -1; }
+    label, .group-label { font-weight: 650; }
+    input, select, textarea {
+      width: 100%;
+      min-height: 2.85rem;
+      padding: .65rem .75rem;
+      color: var(--ink);
+      background: white;
+      border: 1px solid #9aa8a0;
+      border-radius: .15rem;
+      font: inherit;
+    }
+    textarea { min-height: 7rem; resize: vertical; }
+    .hint { margin: 0; color: var(--muted); font-size: .88rem; }
+    .choice-row { display: flex; flex-wrap: wrap; gap: .7rem 1.5rem; }
+    .choice {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      font-weight: 400;
+    }
+    .choice input { width: 1.15rem; min-height: 1.15rem; height: 1.15rem; margin: 0; accent-color: var(--green); }
+    .form-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.6rem; }
+    button {
+      min-height: 2.9rem;
+      padding: .7rem 1.2rem;
+      border: 1px solid var(--green);
+      border-radius: .15rem;
+      font: 700 1rem var(--sans);
+      cursor: pointer;
+    }
+    button[type="submit"] { color: white; background: var(--green); }
+    button[type="reset"] { color: var(--green-dark); background: transparent; }
+    button:hover { filter: brightness(.92); }
+
+    .site-footer { color: #eaf0eb; background: #102521; }
+    .footer-inner { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 2rem; padding-block: 2.5rem; }
+    .site-footer h2 { margin: 0 0 .7rem; font: 700 1.15rem var(--serif); }
+    .site-footer p { margin: .3rem 0; }
+    .site-footer a { color: #f2c982; }
+    .footer-nav ul { display: grid; gap: .25rem; padding: 0; }
+    .copyright { grid-column: 1 / -1; padding-top: 1.2rem; border-top: 1px solid #ffffff30; font-size: .88rem; }
+
+    @media (max-width: 760px) {
+      .about-grid, .facilities-reference { grid-template-columns: 1fr; gap: 2rem; }
+      .book-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .footer-inner > :first-child { grid-column: 1 / -1; }
+    }
+    @media (max-width: 520px) {
+      .header-inner, .content-width, .footer-inner, .hero-copy { width: min(100% - 2rem, 72rem); }
+      .hero { min-height: 23rem; background-position: 58% center; }
+      .book-card { grid-template-columns: 1fr; }
+      .book-card figure img { height: 15rem; min-height: 0; }
+      .form-grid, .footer-inner { grid-template-columns: 1fr; }
+      .field-full, .footer-inner > :first-child, .copyright { grid-column: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      :root { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- Site header and primary navigation -->
+  <header class="site-header">
+    <section class="header-inner" aria-label="Library identity">
+      <a class="brand" href="#top">Alexandria Archive &amp; Learning Hub</a>
+      <p class="tagline">A welcoming home for knowledge, discovery, and the next idea.</p>
+    </section>
+    <nav class="primary-nav" aria-label="Primary navigation">
+      <ul class="header-inner">
+        <li><a href="#about">About</a></li>
+        <li><a href="#catalog">Catalog</a></li>
+        <li><a href="#circulation">Borrowing</a></li>
+        <li><a href="#media">Listen</a></li>
+        <li><a href="#facilities">Facilities</a></li>
+        <li><a href="#reference">Reference</a></li>
+        <li><a href="#reserve">Reserve</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Welcome banner -->
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <section class="hero-copy">
+      <p class="eyebrow">Knowledge belongs to everyone</p>
+      <h1 id="hero-title">A world of ideas, open to you.</h1>
+      <p>Explore a living collection, find a quiet corner, and meet a community that believes learning never stands still.</p>
+    </section>
+  </section>
+
+  <main id="main-content">
+    <!-- About the archive and upcoming event -->
+    <section class="section-pad" id="about" aria-labelledby="about-title">
+      <section class="content-width about-grid">
+        <article>
+          <p class="eyebrow">Our purpose</p>
+          <h2 id="about-title">A library for every chapter.</h2>
+          <p class="section-intro">Alexandria Archive &amp; Learning Hub brings books, research resources, and people together. Our doors are open to curious minds of every age, background, and ambition.</p>
+          <p>From treasured stories and local history to practical digital skills, our collections invite you to follow a question wherever it leads. Librarians are here to help you navigate the shelves, the archives, and the wider world of information.</p>
+          <blockquote>
+            <p>“A library is not a luxury but one of the necessities of life.”</p>
+            <cite>— Henry Ward Beecher</cite>
+          </blockquote>
+        </article>
+        <article class="event-card" aria-labelledby="event-title">
+          <p class="eyebrow">Coming up at the Hub</p>
+          <h3 id="event-title">The Living Page: Stories from the City Archive</h3>
+          <p>Join archivist Leila Haddad for an illustrated evening uncovering the letters, maps, and everyday voices that shaped our neighborhood.</p>
+          <p><strong>Date:</strong> <time datetime="2026-12-03T18:30">Thursday, December 3, 2026, 6:30 p.m.</time></p>
+          <p><strong>Where:</strong> Main Reading Hall · Free and open to all</p>
+        </article>
+      </section>
+    </section>
+
+    <!-- Featured catalog books -->
+    <section class="section-pad catalog-section" id="catalog" aria-labelledby="catalog-title">
+      <section class="content-width">
+        <p class="eyebrow">From the shelves</p>
+        <h2 id="catalog-title">A good place to begin.</h2>
+        <p class="section-intro">Two reader favorites from very different corners of the collection. Ask at the desk or reserve a copy below.</p>
+        <section class="book-grid" aria-label="Featured books">
+          <article class="book-card">
+            <figure>
+              <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=800&q=80" alt="A well-loved open book resting on a wooden table">
+              <figcaption>Classic literature collection</figcaption>
+            </figure>
+            <section class="book-info">
+              <h3>Pride and Prejudice</h3>
+              <p class="author">Jane Austen</p>
+              <p>A sharp, witty classic about first impressions, family, and finding your own way.</p>
+              <p><mark>Classic fiction</mark> <mark>Romance</mark></p>
+              <ul>
+                <li><strong>Call number:</strong> <code>FIC AUS</code></li>
+                <li><strong>Format:</strong> Print, large print, and audiobook</li>
+                <li><strong>Availability:</strong> Multiple copies available</li>
+              </ul>
+            </section>
+          </article>
+          <article class="book-card">
+            <figure>
+              <img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=800&q=80" alt="A laptop on a desk displaying a programming workspace">
+              <figcaption>Technology and computing collection</figcaption>
+            </figure>
+            <section class="book-info">
+              <h3>Python Crash Course</h3>
+              <p class="author">Eric Matthes</p>
+              <p>A hands-on introduction to programming, with projects that make core concepts approachable.</p>
+              <p><mark>Technology</mark> <mark>Programming</mark></p>
+              <ul>
+                <li><strong>Call number:</strong> <code>005.133 MAT</code></li>
+                <li><strong>Format:</strong> Print and e-book</li>
+                <li><strong>Availability:</strong> 2 copies available</li>
+              </ul>
+            </section>
+          </article>
+        </section>
+      </section>
+    </section>
+
+    <!-- Membership, loan duration, and renewal table -->
+    <section class="section-pad" id="circulation" aria-labelledby="circulation-title">
+      <section class="content-width">
+        <p class="eyebrow">Borrow with confidence</p>
+        <h2 id="circulation-title">Membership &amp; loan periods</h2>
+        <p class="section-intro">All memberships are free. Bring your library card when borrowing in person, or sign in online to renew eligible items.</p>
+        <section class="table-wrap" aria-label="Membership loan policy table">
+          <table>
+            <caption>Loan periods and renewal rules by membership tier</caption>
+            <thead>
+              <tr>
+                <th scope="col">Membership tier</th>
+                <th scope="col">Loan duration</th>
+                <th scope="col">Items at a time</th>
+                <th scope="col">Renewal policy</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Community</th>
+                <td>21 days</td>
+                <td>10 items</td>
+                <td>Up to 2 renewals of 21 days each, if no holds are waiting.</td>
+              </tr>
+              <tr>
+                <th scope="row">Student</th>
+                <td>28 days</td>
+                <td>15 items</td>
+                <td>Up to 2 renewals of 28 days each, if no holds are waiting.</td>
+              </tr>
+              <tr>
+                <th scope="row">Research</th>
+                <td>42 days</td>
+                <td>25 items</td>
+                <td>1 renewal of 42 days; special collections are reading-room use only.</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="4">Renew online, by phone, or in person. Overdue items cannot be renewed while another patron has placed a hold.</td>
+              </tr>
+            </tfoot>
+          </table>
+        </section>
+      </section>
+    </section>
+
+    <!-- Embedded lecture recording -->
+    <section class="section-pad media-section" id="media" aria-labelledby="media-title">
+      <section class="content-width">
+        <p class="eyebrow">Listen and learn</p>
+        <h2 id="media-title">Ideas worth hearing.</h2>
+        <p class="section-intro">A sample from our community lecture series, recorded in the Main Reading Hall.</p>
+        <article class="audio-card">
+          <h3>Biology 1410 Lecture 1</h3>
+          <p>A recorded introductory biology lecture by educator Karen Bentz, shared through the Internet Archive.</p>
+          <audio controls preload="none" aria-label="Lecture recording: Biology 1410 Lecture 1">
+            <source src="https://archive.org/download/KarenBentzBiology1410Lecture1_0/Biology1410Lecture1.mp3" type="audio/mpeg">
+            Sorry, your browser does not support embedded audio. You can listen to the recording using the <a href="https://archive.org/download/KarenBentzBiology1410Lecture1_0/Biology1410Lecture1.mp3">direct audio file</a>.
+          </audio>
+          <p class="media-note">Recording: Karen Bentz, “Biology 1410 Lecture 1” (2007), via the <a href="https://archive.org/details/KarenBentzBiology1410Lecture1_0">Internet Archive</a>. Ask a librarian for a transcript or other accessible formats.</p>
+        </article>
+      </section>
+    </section>
+
+    <!-- Reading halls and library terminology -->
+    <section class="section-pad" aria-label="Facilities and reference">
+      <section class="content-width facilities-reference">
+        <section id="facilities" aria-labelledby="facilities-title">
+          <p class="eyebrow">Find your place</p>
+          <h2 id="facilities-title">Reading halls</h2>
+          <p>Choose a space that suits the way you like to learn:</p>
+          <ol class="hall-list">
+            <li><strong>Grand Reading Hall</strong> — a quiet, light-filled space for individual study.</li>
+            <li><strong>Workshop Commons</strong> — flexible tables for group projects and hands-on learning.</li>
+            <li><strong>Children’s Story Room</strong> — a welcoming space for story time, play, and young readers.</li>
+            <li><strong>Archive Reading Room</strong> — supervised access to local history and special collections.</li>
+          </ol>
+        </section>
+        <section id="reference" aria-labelledby="reference-title">
+          <p class="eyebrow">A few useful words</p>
+          <h2 id="reference-title">Library reference</h2>
+          <dl class="reference-list">
+            <dt><dfn>Call number</dfn></dt>
+            <dd>A shelf address that helps you locate a specific item in the collection.</dd>
+            <dt><dfn>Renewal</dfn></dt>
+            <dd>An extension of a loan period, subject to the item’s eligibility and any waiting holds.</dd>
+            <dt><dfn>Interlibrary loan</dfn></dt>
+            <dd>A service that requests books and other materials from a participating library on your behalf.</dd>
+          </dl>
+        </section>
+      </section>
+    </section>
+
+    <!-- Patron registration and book hold form -->
+    <section class="section-pad reserve-section" id="reserve" aria-labelledby="reserve-title">
+      <section class="content-width">
+        <p class="eyebrow">Your next read is waiting</p>
+        <h2 id="reserve-title">Register or place a hold</h2>
+        <p class="section-intro">Complete the form to request a library card or reserve a title for pickup. Required fields are marked.</p>
+        <form class="reserve-form" action="/holds" method="post">
+          <fieldset>
+            <legend>Patron details</legend>
+            <section class="form-grid">
+              <section class="field">
+                <label for="full-name">Full name <span aria-hidden="true">*</span></label>
+                <input id="full-name" name="full-name" type="text" autocomplete="name" required>
+              </section>
+              <section class="field">
+                <label for="card-number">Library card number</label>
+                <input id="card-number" name="card-number" type="text" pattern="[A-Z]{3}-[0-9]{5}" aria-describedby="card-hint" autocomplete="off" title="Use three uppercase letters, a hyphen, and five digits.">
+                <p class="hint" id="card-hint">Format: three uppercase letters, a hyphen, and five digits (for example, ABC-12345).</p>
+              </section>
+              <section class="field field-full">
+                <label for="email">Email address <span aria-hidden="true">*</span></label>
+                <input id="email" name="email" type="email" autocomplete="email" required>
+              </section>
+            </section>
+          </fieldset>
+
+          <fieldset>
+            <legend>Book hold</legend>
+            <section class="form-grid">
+              <section class="field field-full">
+                <label for="book-title">Target book title <span aria-hidden="true">*</span></label>
+                <input id="book-title" name="book-title" type="text" required>
+              </section>
+              <section class="field">
+                <label for="pickup-location">Pickup location</label>
+                <select id="pickup-location" name="pickup-location" required>
+                  <option value="" selected disabled>Choose a pickup location</option>
+                  <option value="main">Main Library Desk</option>
+                  <option value="north">North Branch</option>
+                  <option value="university">University Reading Room</option>
+                </select>
+              </section>
+              <section class="field">
+                <label for="pickup-date">Preferred pickup date</label>
+                <input id="pickup-date" name="pickup-date" type="date" min="2026-11-10">
+                <p class="hint">Choose today or a future date.</p>
+              </section>
+            </section>
+          </fieldset>
+
+          <fieldset>
+            <legend>Preferences</legend>
+            <section class="form-grid">
+              <section class="field field-full">
+                <span class="group-label" id="format-label">Preferred format</span>
+                <section class="choice-row" role="group" aria-labelledby="format-label">
+                  <label class="choice" for="format-physical"><input id="format-physical" name="format" type="radio" value="physical" checked> Physical</label>
+                  <label class="choice" for="format-digital"><input id="format-digital" name="format" type="radio" value="digital"> Digital</label>
+                </section>
+              </section>
+              <section class="field field-full">
+                <span class="group-label" id="notifications-label">Notifications</span>
+                <section class="choice-row" role="group" aria-labelledby="notifications-label">
+                  <label class="choice" for="notify-email"><input id="notify-email" name="notifications" type="checkbox" value="email" checked> Email</label>
+                  <label class="choice" for="notify-sms"><input id="notify-sms" name="notifications" type="checkbox" value="sms"> SMS</label>
+                </section>
+              </section>
+              <section class="field field-full">
+                <label for="special-requests">Special requests</label>
+                <textarea id="special-requests" name="special-requests" rows="4" placeholder="Accessibility needs or other details for our library team"></textarea>
+              </section>
+            </section>
+          </fieldset>
+          <p class="hint"><span aria-hidden="true">*</span> Required fields</p>
+          <section class="form-actions" aria-label="Form actions">
+            <button type="submit">Submit request</button>
+            <button type="reset">Reset form</button>
+          </section>
+        </form>
+      </section>
+    </section>
+  </main>
+
+  <!-- Contact information and secondary navigation -->
+  <footer class="site-footer">
+    <section class="footer-inner">
+      <section>
+        <h2>Visit the Hub</h2>
+        <address>
+          18 Bibliotheca Lane<br>
+          Alexandria, NY 10018<br>
+          <a href="tel:+12125550184">(212) 555-0184</a><br>
+          <a href="mailto:hello@alexandriahub.org">hello@alexandriahub.org</a>
+        </address>
+      </section>
+      <nav class="footer-nav" aria-label="Secondary navigation">
+        <h2>Explore</h2>
+        <ul>
+          <li><a href="#about">Our library</a></li>
+          <li><a href="#catalog">Featured catalog</a></li>
+          <li><a href="#circulation">Membership &amp; borrowing</a></li>
+          <li><a href="#reserve">Register or place a hold</a></li>
+        </ul>
+      </nav>
+      <section>
+        <h2>Opening hours</h2>
+        <p>Monday–Saturday: 9 a.m.–8 p.m.</p>
+        <p>Sunday: 11 a.m.–5 p.m.</p>
+      </section>
+      <p class="copyright">© <time datetime="2026-11-10">November 10, 2026</time> Alexandria Archive &amp; Learning Hub. All rights reserved.</p>
+    </section>
+  </footer>
+</body>
+</html>

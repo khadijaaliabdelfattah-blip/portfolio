@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Selected software development and translation sample projects by Khadija Karrar.">
+  <meta name="theme-color" content="#fbfbf9">
+  <title>Projects | Khadija A. Karrar</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="index.html" aria-label="Khadija A. Karrar home">Khadija <span>A.</span> Karrar</a>
+      <nav class="primary-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a><a href="about.html">About</a><a href="skills.html">Skills</a><a href="portfolio.html" aria-current="page">Projects</a><a href="contact.html">Contact</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" data-theme-toggle><span aria-hidden="true">◐</span><span class="theme-label">Dark mode</span></button>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="page-hero content-width">
+      <p class="eyebrow">Selected work</p>
+      <h1>Projects made to solve, explain, and connect.</h1>
+      <p>A selection of software concepts and clearly identified language samples.</p>
+    </section>
+
+    <section class="section content-width" aria-labelledby="projects-heading">
+      <div class="section-heading">
+        <p class="eyebrow">Portfolio</p>
+        <h2 id="projects-heading">A closer look at my work.</h2>
+      </div>
+      <div class="filter-bar" role="group" aria-label="Filter projects">
+        <button class="filter-button is-active" type="button" data-filter="all" aria-pressed="true">View all</button>
+        <button class="filter-button" type="button" data-filter="software" aria-pressed="false">Software</button>
+        <button class="filter-button" type="button" data-filter="translation" aria-pressed="false">Translation</button>
+      </div>
+      <p class="filter-status visually-hidden" aria-live="polite" data-filter-status></p>
+
+      <div class="project-grid">
+        <article class="card project-card" data-category="software">
+          <div class="project-topline"><span class="project-type">C++ · Object-oriented design</span><span class="project-number">01</span></div>
+          <h3>Banking System</h3>
+          <p class="project-summary">A learning project concept for organizing account operations around clear object responsibilities and a simple transaction history.</p>
+          <ul class="project-points"><li>Account and transaction modeling</li><li>Encapsulated operations</li><li>Stack-based history concept</li></ul>
+          <details class="project-details">
+            <summary>View project concept</summary>
+            <div class="details-content">
+              <p>The design separates account state from transaction handling. A stack can keep the most recent operations accessible for a simple history view.</p>
+              <pre><code>struct Transaction {
+    std::string type;
+    double amount;
+};
+
+class Account {
+public:
+    bool deposit(double amount);
+    bool withdraw(double amount);
+private:
+    double balance{0.0};
+    std::stack&lt;Transaction&gt; history;
+};</code></pre>
+              <p class="sample-note">Illustrative excerpt for this portfolio page; not a link to a published repository.</p>
+            </div>
+          </details>
+        </article>
+
+        <article class="card project-card" data-category="software">
+          <div class="project-topline"><span class="project-type">C++ · Data organization</span><span class="project-number">02</span></div>
+          <h3>Inventory Management System</h3>
+          <p class="project-summary">A modular system concept for keeping product records organized and making stock changes easier to track.</p>
+          <ul class="project-points"><li>Product records and categories</li><li>Stock updates and low-stock checks</li><li>Clear, maintainable module structure</li></ul>
+          <details class="project-details">
+            <summary>View project concept</summary>
+            <div class="details-content">
+              <p>Possible modules include product data, inventory operations, and a menu-driven interface. Separating these concerns keeps the core logic easier to test and extend.</p>
+              <p><strong>Example workflow:</strong> add an item → receive stock → record a sale → review available quantity.</p>
+              <p class="sample-note">Illustrative project concept; source files can be shared when available.</p>
+            </div>
+          </details>
+        </article>
+
+        <article class="card project-card" data-category="translation">
+          <div class="project-topline"><span class="project-type">Language sample · Localization</span><span class="project-number">03</span></div>
+          <h3>Technical &amp; Financial Copy</h3>
+          <p class="project-summary">A short illustrative sample showing how one concise system message can be presented across several languages.</p>
+          <div class="translation-sample">
+            <p><strong>Source · English</strong><br>“Your report is ready to review.”</p>
+            <p><strong>German · sample</strong><br lang="de">„Ihr Bericht kann jetzt geprüft werden.“</p>
+            <p><strong>Japanese · sample</strong><br lang="ja">「レポートを確認できるようになりました。」</p>
+            <p><strong>Korean · sample</strong><br lang="ko">“보고서를 검토할 수 있습니다.”</p>
+          </div>
+          <details class="project-details">
+            <summary>View localization notes</summary>
+            <div class="details-content">
+              <p>The phrasing is kept brief for a product interface. A real translation would be reviewed against the product context, intended audience, and language proficiency required for the project.</p>
+              <p class="sample-note">Illustrative language samples, not client work or certified translations.</p>
+            </div>
+          </details>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section-tinted">
+      <div class="content-width compact-cta">
+        <div><p class="eyebrow">Want to collaborate?</p><h2>Let’s talk about your project.</h2></div>
+        <a class="button button-primary" href="contact.html">Contact me <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="content-width footer-main"><div><a class="brand footer-brand" href="index.html">Khadija <span>A.</span> Karrar</a><p>Software development &amp; multilingual communication.</p></div><nav class="footer-links" aria-label="Footer navigation"><a href="about.html">About</a><a href="skills.html">Skills</a><a href="portfolio.html">Projects</a><a href="contact.html">Contact</a><a href="https://mostaql.com/" target="_blank" rel="noopener noreferrer">Mostaql</a><a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a></nav></div>
+    <div class="content-width footer-bottom"><p>© 2026 Khadija Ali Abdelfattah Karrar. All rights reserved.</p><a href="#main-content">Back to top ↑</a></div>
+  </footer>
+</body>
+</html>
